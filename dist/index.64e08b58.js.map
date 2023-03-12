@@ -1,0 +1,1 @@
+{"mappings":"AAAA,sBAAsB;AACtB,MAAM,SAAS,SAAU,KAAK,EAAE,EAAE,CAElC;AACA","sources":["src/js/control.js"],"sourcesContent":["// import ipModel from\r\nconst ipData = function (ip = '') {\r\n\r\n}\r\nipData()"],"names":[],"version":3,"file":"index.64e08b58.js.map","sourceRoot":"/__parcel_source_root/"}
