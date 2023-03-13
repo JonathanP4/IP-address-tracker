@@ -232,10 +232,6 @@ img, video {
   position: fixed;
 }
 
-.absolute {
-  position: absolute;
-}
-
 .relative {
   position: relative;
 }
@@ -282,6 +278,10 @@ img, video {
 
 .w-4\/5 {
   width: 80%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .items-center {
@@ -339,11 +339,6 @@ img, video {
   padding: 1.5rem;
 }
 
-.py-6 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-
 .text-center {
   text-align: center;
 }
@@ -369,6 +364,12 @@ img, video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.transition-all {
+  transition-property: all;
+  transition-duration: .15s;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 }
 
 :root {
@@ -408,9 +409,8 @@ form.flex div.p-4 {
 }
 
 .details {
+  text-align: center;
   transition: all .3s;
-  left: 1.5rem;
-  right: 1.5rem;
 }
 
 .details h1 {
@@ -426,8 +426,10 @@ form.flex div.p-4 {
 }
 
 .error-modal {
+  box-shadow: 0 0 5px var(--very-dark-gray);
   height: 15vh;
   font-size: 1.2rem;
+  transition: all .3s;
   top: 30vh;
   left: 1.5rem;
   right: 1.5rem;
@@ -435,6 +437,11 @@ form.flex div.p-4 {
 
 .error-modal img {
   width: 35px;
+}
+
+.error-modal.hide {
+  pointer-events: none;
+  opacity: 0;
 }
 
 .overlay {
@@ -455,6 +462,40 @@ form.flex div.p-4 {
 
 #map .leaflet-control-zoom {
   display: none;
+}
+
+@media (min-width: 1300px) {
+  :root {
+    font-size: 18px;
+  }
+
+  .top {
+    width: 65%;
+    margin: 0 auto;
+  }
+
+  .details {
+    text-align: left;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    gap: 0;
+    padding: 2.5rem;
+    display: grid;
+  }
+
+  .details > div {
+    border-right: 1px solid var(--dark-gray);
+    max-height: 245px;
+    padding: 0 1rem;
+  }
+
+  .details div:nth-child(4) {
+    border-right: none;
+  }
+}
+
+.hover\:opacity-80:hover {
+  opacity: .8;
 }
 
 /*# sourceMappingURL=index.c92073ef.css.map */

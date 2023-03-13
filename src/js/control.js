@@ -7,7 +7,7 @@ const ipControl = async function (ip = '') {
       // fetch data based on provided ip (defaults to user ip)
       const data = await model.fetchIpData(ip)
 
-      const coords = [data.location.lat, data.location.lng]
+      const coords = [data.latitude, data.longitude]
 
       mapView.setMapView(coords)
       mapView.renderMarker(coords)

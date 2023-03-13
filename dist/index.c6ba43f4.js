@@ -568,8 +568,8 @@ const ipControl = async function(ip = "") {
         // fetch data based on provided ip (defaults to user ip)
         const data = await _model.fetchIpData(ip);
         const coords = [
-            data.location.lat,
-            data.location.lng
+            data.latitude,
+            data.longitude
         ];
         (0, _mapViewDefault.default).setMapView(coords);
         (0, _mapViewDefault.default).renderMarker(coords);
@@ -602,8 +602,9 @@ parcelHelpers.export(exports, "fetchIpData", ()=>fetchIpData);
 var _config = require("./config");
 const fetchIpData = async function(ip) {
     try {
-        const res = await fetch(`${(0, _config.API_URL)}${ip}`);
+        const res = await fetch(`${(0, _config.API_URL)}?api_key=${(0, _config.API_KEY)}&ip_address=${ip}`);
         const data = await res.json();
+        console.log(data);
         if (!res.ok) throw new Error(`Something went wrong! Please try again (${res.status})`);
         return data;
     } catch (err) {
@@ -615,9 +616,11 @@ const fetchIpData = async function(ip) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
+parcelHelpers.export(exports, "API_KEY", ()=>API_KEY);
 parcelHelpers.export(exports, "CLOSE_MODAL_TIMEOUT", ()=>CLOSE_MODAL_TIMEOUT);
 parcelHelpers.export(exports, "SHOW_DETAILS_TIMEOUT", ()=>SHOW_DETAILS_TIMEOUT);
-const API_URL = "https://geo.ipify.org/api/v2/country,city?apiKey=at_9cneM8GwzhdGBcGCxxCmKhxyShFgW&ipAddress=";
+const API_URL = "https://ipgeolocation.abstractapi.com/v1/";
+const API_KEY = "febc2491fbd64d08887e768be2f5a718";
 const CLOSE_MODAL_TIMEOUT = 1.5;
 const SHOW_DETAILS_TIMEOUT = 300;
 
@@ -681,22 +684,22 @@ class IpView {
     }
     generateMarkup(data) {
         const markup = `
-         <div class="details collapsed absolute bg-white grid gap-2 py-6 rounded-xl mt-5">
+         <div class="details collapsed bg-white grid gap-2 p-6 rounded-xl mt-5 w-90">
             <div>
                <span>IP Address</span>
-               <h1>${data.ip}</h1>
+               <h1>${data.ip_address}</h1>
             </div>
             <div>
                <span>Location</span>
-               <h1>${data.location.region}, ${data.location.city} ${data.location.geonameId}</h1>
+               <h1>${data.region}, ${data.city} ${data.city_geoname_id}</h1>
             </div>
             <div>
                <span>Timezone</span>
-               <h1>UTC -05:00</h1>
+               <h1>UTC -${String(Math.abs(data.timezone.gmt_offset)).padStart(2, 0)}:00</h1>
             </div>
             <div>
                <span>ISP</span>
-               <h1>${data.isp}</h1>
+               <h1>${data.connection.isp_name}</h1>
             </div>
          </div>`;
         setTimeout(this.showDetails, 300);
@@ -706,16 +709,19 @@ class IpView {
         document.querySelector(".details").classList.remove("collapsed");
     }
     generateError(err) {
-        const errorMarkup = `
+        document.querySelector(".error-modal")?.remove();
+        return `
       <div class="error-modal fixed flex justify-center items-center bg-white p-4
-         rounded-xl text-center z-20">
-            <img src="${(0, _triangleExclamationSolidSvgDefault.default)}" alt="warning">
+         rounded-xl text-center z-20 ">
+            <img src="${0, _triangleExclamationSolidSvgDefault.default}" alt="warning">
             <h1 class="font-bold text-red-500 w-4/5">${err}</h1>
       </div>`;
-        return errorMarkup;
     }
     renderError(err) {
         this._main.insertAdjacentHTML("beforeend", this.generateError(err));
+        setTimeout(()=>{
+            document.querySelector(".error-modal").classList.add("hide");
+        }, (0, _config.CLOSE_MODAL_TIMEOUT) * 1000);
     }
 }
 exports.default = new IpView();

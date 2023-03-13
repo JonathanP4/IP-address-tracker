@@ -23,17 +23,18 @@
       <div class="overlay hidden left-0 top-0 z-10"></div>
       <div class="top-container relative p-6 text-center z-20">
          <h1 class="text-2xl text-white font-medium mb-4">IP Address Tracker</h1>
-         <form class="flex items-center">
-            <input class="input-ip bg-white p-4 rounded-tl-xl rounded-bl-xl" type="text"
-               placeholder="Search for any IP address or domain">
-            <div class="bg-black p-4 rounded-tr-xl rounded-br-xl">
-               <button type="submit">
-                  <img src="./images/icon-arrow.svg"></img>
-               </button>
+         <div class="top">
+            <form class="flex items-center">
+               <input class="input-ip bg-white p-4 rounded-tl-xl rounded-bl-xl" type="text"
+                  placeholder="Search for any IP address or domain">
+               <div class="bg-black p-4 rounded-tr-xl rounded-br-xl hover:opacity-80 cursor-pointer">
+                  <button type="submit">
+                     <img src="./images/icon-arrow.svg"></img>
+                  </button>
+               </div>
+            </form>
+            <div class="details-wrapper">
             </div>
-         </form>
-         <div class="details-wrapper">
-
          </div>
       </div>
       <div id="map" class="z-10 bottom-0"></div>

@@ -26,24 +26,24 @@ class IpView {
    }
    generateMarkup(data) {
       const markup = `
-         <div class="details collapsed absolute bg-white grid gap-2 py-6 rounded-xl mt-5">
+         <div class="details collapsed bg-white grid gap-2 p-6 rounded-xl mt-5 w-90">
             <div>
                <span>IP Address</span>
-               <h1>${data.ip}</h1>
+               <h1>${data.ip_address}</h1>
             </div>
             <div>
                <span>Location</span>
-               <h1>${data.location.region}, ${data.location.city} ${data.location.geonameId}</h1>
+               <h1>${data.region}, ${data.city} ${data.city_geoname_id}</h1>
             </div>
             <div>
                <span>Timezone</span>
-               <h1>UTC -05:00</h1>
+               <h1>UTC -${String(Math.abs(data.timezone.gmt_offset)).padStart(2, 0)}:00</h1>
             </div>
             <div>
                <span>ISP</span>
-               <h1>${data.isp}</h1>
+               <h1>${data.connection.isp_name}</h1>
             </div>
-         </div>`;
+         </div>`
       setTimeout(this.showDetails, 300)
       return markup
    }
@@ -51,16 +51,19 @@ class IpView {
       document.querySelector('.details').classList.remove('collapsed')
    }
    generateError(err) {
-      const errorMarkup = `
+      document.querySelector('.error-modal')?.remove()
+      return `
       <div class="error-modal fixed flex justify-center items-center bg-white p-4
-         rounded-xl text-center z-20">
+         rounded-xl text-center z-20 ">
             <img src="${icon}" alt="warning">
             <h1 class="font-bold text-red-500 w-4/5">${err}</h1>
       </div>`
-      return errorMarkup
    }
    renderError(err) {
       this._main.insertAdjacentHTML('beforeend', this.generateError(err))
+      setTimeout(() => {
+         document.querySelector('.error-modal').classList.add('hide')
+      }, CLOSE_MODAL_TIMEOUT * 1000)
    }
 }
 export default new IpView()
