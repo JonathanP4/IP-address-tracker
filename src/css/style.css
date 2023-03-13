@@ -123,8 +123,9 @@ form.flex div.p-4 {
    }
 
    .top {
-      width: 90vmin;
+      width: 90vmax;
       margin: 0 auto;
+      max-width: 1120px;
    }
 
    .details {
