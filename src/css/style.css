@@ -12,6 +12,10 @@
    -webkit-tap-highlight-color: transparent;
 }
 
+body {
+   max-width: 1440px;
+}
+
 input,
 button,
 button:focus,
@@ -104,8 +108,13 @@ form.flex div.p-4 {
       font-size: 18px;
    }
 
+   form {
+      width: 60%;
+      margin: 0 auto;
+   }
+
    .top {
-      width: 65%;
+      width: 70%;
       margin: 0 auto;
    }
 
