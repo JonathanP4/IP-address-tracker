@@ -103,18 +103,27 @@ form.flex div.p-4 {
    display: none;
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 700px) {
    :root {
       font-size: 18px;
    }
 
+   body {
+      margin: 0 auto;
+   }
+
+   .top-container {
+      background: url('../images/pattern-bg-desktop.png');
+   }
+
    form {
-      width: 60%;
+      width: 50vmax;
+      max-width: 630px;
       margin: 0 auto;
    }
 
    .top {
-      width: 70%;
+      width: 90vmin;
       margin: 0 auto;
    }
 
@@ -123,7 +132,7 @@ form.flex div.p-4 {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       justify-content: center;
-      padding: 2.5rem;
+      padding: 2rem;
       gap: 0;
    }
 
